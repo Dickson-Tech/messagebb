@@ -11,17 +11,61 @@
     {
       "uuid": "94a5a195-69b3-41be-97df-4e1fb273a7d3",
       "type": "http",
-      "documentation": "",
+      "documentation": "Get status of sent emails. Use both \"api_key\" and \"requestUID\" in your request.",
       "method": "get",
       "endpoint": "status/email",
       "responses": [
         {
           "uuid": "352f32f1-e6de-47fd-9454-22f34b8592ad",
-          "body": "{}",
+          "body": "{\n  {{#each (queryParamRaw 'status')}}  \n    \"{{this}}\": 0{{#unless @last}},{{/unless}}  \n  {{/each}}\n}\n",
           "latency": 0,
           "statusCode": 200,
-          "label": "",
+          "label": "Request successfully accepted",
           "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "requestUID",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "header",
+              "modifier": "api_key",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "query",
+              "modifier": "status",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "a7646ba1-13b1-4eb7-81a5-9eb210b3571f",
+          "body": "",
+          "latency": 0,
+          "statusCode": 405,
+          "label": "Invalid input",
+          "headers": [
+            {
+              "key": "Allow",
+              "value": "POST"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -119,6 +163,72 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "fcfdaff0-e8fb-4a24-a45d-1d731a9487f7",
+      "type": "http",
+      "documentation": "Endpoint to invoke invalid test case",
+      "method": "post",
+      "endpoint": "status/email",
+      "responses": [
+        {
+          "uuid": "41eec5f4-ced0-461f-ba67-e42b57820529",
+          "body": "",
+          "latency": 0,
+          "statusCode": 405,
+          "label": "Invalid input",
+          "headers": [
+            {
+              "key": "Allow",
+              "value": "POST"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "031047d8-aaa5-416a-b367-6c9adccd10d5",
+      "type": "http",
+      "documentation": "Endpoint to invoke invalid test case",
+      "method": "put",
+      "endpoint": "status/email",
+      "responses": [
+        {
+          "uuid": "da8091ec-c624-4ecd-8aa5-11be87ee8895",
+          "body": "",
+          "latency": 0,
+          "statusCode": 405,
+          "label": "Invalid input",
+          "headers": [
+            {
+              "key": "Allow",
+              "value": "POST"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -137,6 +247,14 @@
     {
       "type": "route",
       "uuid": "777d1380-3802-4a4a-8866-94ddd1d2cf68"
+    },
+    {
+      "type": "route",
+      "uuid": "fcfdaff0-e8fb-4a24-a45d-1d731a9487f7"
+    },
+    {
+      "type": "route",
+      "uuid": "031047d8-aaa5-416a-b367-6c9adccd10d5"
     }
   ],
   "proxyMode": false,
