@@ -39,8 +39,8 @@
     {
       "uuid": "a2fe3258-ffa8-48f7-9a0b-312400f57acd",
       "type": "http",
-      "documentation": "",
-      "method": "get",
+      "documentation": "This service may reside on both Messaging BB's and client's side. If used, a matching OpenAPI spec must be provided by the service provider, describing the expected input when making request to the endpoint.",
+      "method": "post",
       "endpoint": "callback/email",
       "responses": [
         {
@@ -48,8 +48,52 @@
           "body": "{}",
           "latency": 0,
           "statusCode": 200,
-          "label": "",
+          "label": "Request successfully accepted",
           "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "api_key",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "header",
+              "modifier": "requestUID",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "body",
+              "modifier": "",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "062d285f-1e01-49d2-acae-f79206bb8896",
+          "body": "",
+          "latency": 0,
+          "statusCode": 405,
+          "label": "Invalid input",
+          "headers": [
+            {
+              "key": "Allow",
+              "value": "POST"
+            }
+          ],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
@@ -285,15 +329,15 @@
       "responseMode": null
     },
     {
-      "uuid": "a48ad7b4-e9dc-43d8-9023-86131c4f3e52",
+      "uuid": "4602c44a-22a8-484e-876b-6615b3b698ec",
       "type": "http",
-      "documentation": "",
+      "documentation": "Route for testing to return status 405 - Method Not Allowed in case of request with invalid method",
       "method": "put",
-      "endpoint": "send/email/batch",
+      "endpoint": "callback/email",
       "responses": [
         {
-          "uuid": "5d0ec5c7-4835-4712-a562-31be844ce144",
-          "body": "{}",
+          "uuid": "e81563a6-2e66-42aa-a64a-8ef44953d3ec",
+          "body": "",
           "latency": 0,
           "statusCode": 405,
           "label": "",
@@ -318,14 +362,14 @@
       "responseMode": null
     },
     {
-      "uuid": "145095f5-1591-48bb-9cdf-8518c860763a",
+      "uuid": "640e2711-e158-43ab-a50d-bd94adf062bb",
       "type": "http",
-      "documentation": "",
-      "method": "delete",
-      "endpoint": "send/email/batch",
+      "documentation": "Route for testing to return status 405 - Method Not Allowed in case of request with invalid method",
+      "method": "get",
+      "endpoint": "callback/email",
       "responses": [
         {
-          "uuid": "677d1fb4-d44d-4825-aa25-a113abc5ccc3",
+          "uuid": "c534451a-8b9a-401a-afb2-142a656f2b9c",
           "body": "{}",
           "latency": 0,
           "statusCode": 405,
@@ -386,11 +430,11 @@
     },
     {
       "type": "route",
-      "uuid": "a48ad7b4-e9dc-43d8-9023-86131c4f3e52"
+      "uuid": "4602c44a-22a8-484e-876b-6615b3b698ec"
     },
     {
       "type": "route",
-      "uuid": "145095f5-1591-48bb-9cdf-8518c860763a"
+      "uuid": "640e2711-e158-43ab-a50d-bd94adf062bb"
     }
   ],
   "proxyMode": false,
