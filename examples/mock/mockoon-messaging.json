@@ -63,7 +63,7 @@
           "headers": [
             {
               "key": "Allow",
-              "value": "POST"
+              "value": "GET"
             }
           ],
           "bodyType": "INLINE",
@@ -180,7 +180,7 @@
           "headers": [
             {
               "key": "Allow",
-              "value": "POST"
+              "value": "GET"
             }
           ],
           "bodyType": "INLINE",
@@ -213,7 +213,7 @@
           "headers": [
             {
               "key": "Allow",
-              "value": "POST"
+              "value": "GET"
             }
           ],
           "bodyType": "INLINE",

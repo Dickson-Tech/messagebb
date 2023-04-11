@@ -62,7 +62,7 @@ Feature: Get status of your email
         Then User receives a response from the /status/email endpoint
         And The /status/email response should be returned in a timely manner 15000ms
         And The /status/email response should have status 405 - Method not allowed
-        And The /status/email response should contain Allow header with POST method which is allowed
+        And The /status/email response should contain Allow header with GET method which is allowed
 
         Examples:
         | unallowedMethod  | api_key     |
@@ -80,7 +80,7 @@ Feature: Get status of your email
         Then User receives a response from the /status/email endpoint
         And The /status/email response should be returned in a timely manner 15000ms
         And The /status/email response should have status 405 - Method not allowed
-        And The /status/email response should contain Allow header with POST method which is allowed
+        And The /status/email response should contain Allow header with GET method which is allowed
 
         Examples:
         | unallowedMethod  | api_key     |

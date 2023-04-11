@@ -6,9 +6,13 @@ module.exports = {
     key: 'content-type',
     value: 'application/json; charset=utf-8',
   },
-  allowHeader: {
+  allowHeaderPost: {
     key: 'allow',
     value: 'POST',
+  },
+  allowHeaderGet: {
+    key: 'allow',
+    value: 'GET',
   },
   acceptHeader: {
     key: 'Accept',

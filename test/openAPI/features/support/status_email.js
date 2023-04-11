@@ -6,7 +6,7 @@ const {
   defaultResponseTime,
   statusEmailEndpoint,
   contentTypeHeader,
-  allowHeader,
+  allowHeaderGet,
   acceptHeader,
   doArraysHaveTheSameElements,
   statusEmailResponseSchema,
@@ -134,11 +134,11 @@ Then(
 );
 
 Then(
-  'The \\/status\\/email response should contain Allow header with POST method which is allowed',
+  'The \\/status\\/email response should contain Allow header with GET method which is allowed',
   () =>
     specStatusEmail
       .response()
-      .to.have.headerContains(allowHeader.key, allowHeader.value)
+      .to.have.headerContains(allowHeaderGet.key, allowHeaderGet.value)
 );
 
 // Scenario Outline: User cannot check the status of emails sent in batch due to unallowed method in the request
