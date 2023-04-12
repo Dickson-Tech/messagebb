@@ -38,24 +38,6 @@ Feature: Respond to an email sent via Messaging BB
         | ewogICJyZWNpcGllbnRJbmZvIjogewogICAgImVtYWlsIjogImN1c3RvbWVyQGV4YW1wbGUuY29tIiwKICAgICJlbWFpbENDIjogImN1c3RvbWVyLWNjQGV4YW1wbGUuY29tIiwKICAgICJlbWFpbEJDQyI6ICJjdXN0b21lci1iY2NAZXhhbXBsZS5jb20iLAogICAgIm5hbWUiOiAiRXhhbXBsZSBDdXN0b21lciIKICB9Cn0=     |
         | ewogICJyZWNpcGllbnRJbmZvIjogewogICAgImVtYWlsIjogImN1c3RvbWVyMkBleGFtcGxlLmNvbSIsCiAgICAiZW1haWxDQyI6ICJjdXN0b21lcjItY2NAZXhhbXBsZS5jb20iLAogICAgImVtYWlsQkNDIjogImN1c3RvbWVyMi1iY2NAZXhhbXBsZS5jb20iLAogICAgIm5hbWUiOiAiRXhhbXBsZSBDdXN0b21lciIKICB9Cn0= |
 
-        # First:
-        # {
-        #   "recipientInfo": {
-        #   "email": "customer@example.com",
-        #   "emailCC": "customer-cc@example.com",
-        #   "emailBCC": "customer-bcc@example.com",
-        #   "name": "Example Customer"
-        #   }
-        # }
-        # Second:
-        # {
-        #   "recipientInfo": {
-        #   "email": "customer2@example.com",
-        #   "emailCC": "customer2-cc@example.com",
-        #   "emailBCC": "customer2-bcc@example.com",
-        #   "name": "Example Customer"
-        #   }
-        # }
 
     @unit @negative
     Scenario Outline: Callback endpoint is unable to respond to an email sent via Messaging BB due to unallowed method in the request
