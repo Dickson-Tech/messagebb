@@ -7,11 +7,24 @@ module.exports = {
   jsonToBase64,
   localhost: 'http://localhost:3333/',
   defaultResponseTime: 15000,
+  callbackEmailEndpoint: 'callback/email',
   sendSingleEmailEndpoint: 'send/email/single',
   sendBatchEmailsEndpoint: 'send/email/batch',
   contentTypeHeader: {
     key: 'content-type',
     value: 'application/json; charset=utf-8',
+  },
+  allowHeaderPost: {
+    key: 'allow',
+    value: 'POST',
+  },
+  allowHeaderGet: {
+    key: 'allow',
+    value: 'GET',
+  },
+  acceptHeader: {
+    key: 'Accept',
+    value: 'application/json',
   },
   sendEmailResponseSchema: {
     type: 'object',

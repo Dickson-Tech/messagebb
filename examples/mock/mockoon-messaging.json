@@ -370,7 +370,73 @@
       "responses": [
         {
           "uuid": "c534451a-8b9a-401a-afb2-142a656f2b9c",
-          "body": "{}",
+          "body": "",
+          "latency": 0,
+          "statusCode": 405,
+          "label": "",
+          "headers": [
+            {
+              "key": "Allow",
+              "value": "POST"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "668ce3d7-aa4c-427d-95d9-ed73146633f3",
+      "type": "http",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "send/email/batch",
+      "responses": [
+        {
+          "uuid": "0b826b1a-ad14-43aa-adb4-7e55c2248e3d",
+          "body": "",
+          "latency": 0,
+          "statusCode": 405,
+          "label": "",
+          "headers": [
+            {
+              "key": "Allow",
+              "value": "POST"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "82e1b1eb-5e18-44b6-bf4f-c1e0e69128e9",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "send/email/batch",
+      "responses": [
+        {
+          "uuid": "65c750d4-e296-404d-b7e1-36f197fbf98a",
+          "body": "",
           "latency": 0,
           "statusCode": 405,
           "label": "",
@@ -435,6 +501,14 @@
     {
       "type": "route",
       "uuid": "640e2711-e158-43ab-a50d-bd94adf062bb"
+    },
+    {
+      "type": "route",
+      "uuid": "668ce3d7-aa4c-427d-95d9-ed73146633f3"
+    },
+    {
+      "type": "route",
+      "uuid": "82e1b1eb-5e18-44b6-bf4f-c1e0e69128e9"
     }
   ],
   "proxyMode": false,

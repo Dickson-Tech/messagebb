@@ -5,6 +5,9 @@ const {
   localhost,
   defaultResponseTime,
   callbackEmailEndpoint,
+  sendSingleEmailEndpoint,
+  sendBatchEmailsEndpoint,
+  sendEmailSingleRequestBody,
   allowHeaderPost,
   acceptHeader,
 } = require('./helpers/helpers');
@@ -12,18 +15,37 @@ const {
 chai.use(require('chai-json-schema'));
 
 let specCallbackEmail;
+let specSendEmail;
+
+let requestUID;
 
 const baseUrl = localhost + callbackEmailEndpoint;
+const singleEmailUrl = localhost + sendSingleEmailEndpoint;
+const batchEmailUrl = localhost + sendBatchEmailsEndpoint;
 const endpointTag = { tags: `@endpoint=/${callbackEmailEndpoint}` };
 
 Before(endpointTag, () => {
   specCallbackEmail = spec();
+  specSendEmail = spec();
 });
 
 // Scenario: Callback endpoint successfully responds to an email sent via Messaging BB smoke type test
-Given('Single email is sent and returns valid requestUID', () => {
-  // TODO POST request to /send/email/single and save requestUID from the response to variable
-});
+Given(
+  'Single email with given {string} as api_key and valid payload is sent and returns requestUID',
+  async apiKey => {
+    specSendEmail
+      .post(singleEmailUrl)
+      .withHeaders('api_key', apiKey)
+      .withHeaders(acceptHeader.key, acceptHeader.value)
+      .withBody(sendEmailSingleRequestBody);
+
+    await specSendEmail.toss();
+
+    requestUID = specSendEmail._response.json.requestUID;
+
+    chai.expect(requestUID.length).to.be.greaterThan(0);
+  }
+);
 
 When(
   '{string} request with given {string} as api_key and valid requestUID in the headers is sent',
@@ -33,7 +55,7 @@ When(
       .withPath(baseUrl)
       .withHeaders('api_key', apiKey)
       .withHeaders(acceptHeader.key, acceptHeader.value)
-      .withHeaders('requestUID', /* requestUID from Given */ '1')
+      .withHeaders('requestUID', requestUID)
 );
 
 When(
@@ -64,9 +86,22 @@ Then('The \\/callback\\/email response should have status 200', () =>
 
 // Scenario: Callback endpoint successfully responds to a batch of emails sent via Messaging BB smoke type test
 // Others Given, When, Then for this scenario are written in the aforementioned example
-Given('Batch of emails is sent and returns valid requestUID', () => {
-  // TODO POST request to /send/email/batch and save requestUID from the response to variable
-});
+Given(
+  'Batch of emails with given {string} as api_key and valid payload is sent and returns requestUID',
+  async apiKey => {
+    specSendEmail
+      .post(batchEmailUrl)
+      .withHeaders('api_key', apiKey)
+      .withHeaders(acceptHeader.key, acceptHeader.value)
+      .withBody(sendEmailSingleRequestBody);
+
+    await specSendEmail.toss();
+
+    requestUID = specSendEmail._response.json.requestUID;
+
+    chai.expect(requestUID.length).to.be.greaterThan(0);
+  }
+);
 
 // Scenario Outline: Callback endpoint successfully responds to an email sent via Messaging BB
 // Given, When, Then for this scenario are written in the aforementioned example
@@ -95,7 +130,7 @@ When(
       .withMethod(method)
       .withPath(baseUrl)
       .withHeaders(acceptHeader.key, acceptHeader.value)
-      .withHeaders('requestUID', /* requestUID from Given */ '1')
+      .withHeaders('requestUID', requestUID)
 );
 
 When(
@@ -131,4 +166,5 @@ When('The request is missing required payload', () => 'missing payload');
 
 After(endpointTag, () => {
   specCallbackEmail.end();
+  specSendEmail.end();
 });
