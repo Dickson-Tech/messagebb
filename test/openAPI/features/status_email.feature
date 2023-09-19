@@ -11,7 +11,7 @@ Feature: Get an overview of sent emails statuses
         Then User receives a response from the /status/email endpoint
         And The /status/email response should be returned in a timely manner 15000ms
         And The /status/email response should have status 200
-        And The /status/email response should have content-type: application/json header
+        And The /status/email response should have "content-type": "application/json" header
         And The /status/email response should match json schema
         And The /status/email response should have all statuses which the user selected
 
@@ -26,7 +26,7 @@ Feature: Get an overview of sent emails statuses
         Then User receives a response from the /status/email endpoint
         And The /status/email response should be returned in a timely manner 15000ms
         And The /status/email response should have status 200
-        And The /status/email response should have content-type: application/json header
+        And The /status/email response should have "content-type": "application/json" header
         And The /status/email response should match json schema
         And The /status/email response should have all statuses which the user selected
 
@@ -41,7 +41,7 @@ Feature: Get an overview of sent emails statuses
         Then User receives a response from the /status/email endpoint
         And The /status/email response should be returned in a timely manner 15000ms
         And The /status/email response should have status 200
-        And The /status/email response should have content-type: application/json header
+        And The /status/email response should have "content-type": "application/json" header
         And The /status/email response should match json schema
         And The /status/email response should have all statuses which the user selected
 
@@ -100,6 +100,9 @@ Feature: Get an overview of sent emails statuses
         And The /status/email response should be returned in a timely manner 15000ms
         And The /status/email response should have status 405 - Method not allowed
 
+        Examples:
+        | api_key     |
+        | abcdef12345 |
 
     @unit @negative
     Scenario: User is unable to check the status of an email due to missing required requestUID in the request
@@ -123,7 +126,10 @@ Feature: Get an overview of sent emails statuses
         Then User receives a response from the /status/email endpoint
         And The /status/email response should be returned in a timely manner 15000ms
         And The /status/email response should have status 405 - Method not allowed
-
+        
+        Examples:
+        | api_key     |
+        | abcdef12345 |
 
     @unit @negative
     Scenario: User is unable to check the status of the email due to missing required api_key, requestUID and status in the request

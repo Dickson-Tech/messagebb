@@ -9,7 +9,7 @@ Feature: Send batch emails
         Then User receives a response from /send/email/batch endpoint
         And The /send/email/batch response should be returned in a timely manner 15000ms
         And The /send/email/batch response should have status 200
-        And The /send/email/batch response should have content-type: application/json header
+        And The /send/email/batch response should have "content-type": "application/json" header
         And The /send/email/batch response should match json schema
 
 

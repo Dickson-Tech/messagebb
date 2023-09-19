@@ -9,7 +9,7 @@ Feature: Send single email
         Then User receives a response from /send/email/single endpoint
         And The /send/email/single response should be returned in a timely manner 15000ms
         And The /send/email/single response should have status 200
-        And The /send/email/single response should have content-type: application/json header
+        And The /send/email/single response should have "content-type": "application/json" header
         And The /send/email/single response should match json schema
 
 

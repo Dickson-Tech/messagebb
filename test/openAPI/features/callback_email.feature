@@ -4,34 +4,35 @@ Feature: Respond to an email sent via Messaging BB
     @smoke @unit @positive
     Scenario: Callback endpoint successfully responds to an email sent via Messaging BB smoke type test
 
-        Given Single email with given "abcdef12345" as api_key and valid payload is sent and returns requestUID
-        When "POST" request with given "abcdef12345" as api_key and valid requestUID in the headers is sent
+        Given Single email with given "abcdef12345" as api_key and valid payload is sent and returns requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl"
+        When "POST" request with given "abcdef12345" as api_key and valid requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl", in the headers is sent
         And The request contains "Meta-info" as meta and "Q2xpZW50LXNwZWNpZmljIGNvbnRlbnQsIG1vc3QgbGlrZWx5IEpTT04=" as content in the payload
         Then The response from the /callback/email endpoint is received
         And The /callback/email response should be returned in a timely manner 15000ms
         And The /callback/email response should have status 200
-
+        And The /callback/email response should have "content-type": "application/json" header
 
     @smoke @unit @positive
     Scenario: Callback endpoint successfully responds to a batch of emails sent via Messaging BB smoke type test
 
-        Given Batch of emails with given "abcdef12345" as api_key and valid payload is sent and returns requestUID
-        When "POST" request with given "abcdef12345" as api_key and valid requestUID in the headers is sent
+        Given Batch of emails with given "abcdef12345" as api_key and valid payload is sent and returns requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl"
+        When "POST" request with given "abcdef12345" as api_key and valid requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl", in the headers is sent
         And The request contains "Meta-info" as meta and "Q2xpZW50LXNwZWNpZmljIGNvbnRlbnQsIG1vc3QgbGlrZWx5IEpTT04=" as content in the payload
         Then The response from the /callback/email endpoint is received
         And The /callback/email response should be returned in a timely manner 15000ms
         And The /callback/email response should have status 200
-
+        And The /callback/email response should have "content-type": "application/json" header
 
     @unit @positive
     Scenario Outline: Callback endpoint successfully responds to an email sent via Messaging BB
 
-        Given Single email with given "abcdef12345" as api_key and valid payload is sent and returns requestUID
-        When "POST" request with given "abcdef12345" as api_key and valid requestUID in the headers is sent
+        Given Single email with given "abcdef12345" as api_key and valid payload is sent and returns requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl"
+        When "POST" request with given "abcdef12345" as api_key and valid requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl", in the headers is sent
         And The request contains "Meta-info" as meta and "<content>" as content in the payload
         Then The response from the /callback/email endpoint is received
         And The /callback/email response should be returned in a timely manner 15000ms
         And The /callback/email response should have status 200
+        And The /callback/email response should have "content-type": "application/json" header
 
         Examples:
         | content                                                                                                                                                                                                                                                  | 
@@ -42,13 +43,14 @@ Feature: Respond to an email sent via Messaging BB
     @unit @negative
     Scenario Outline: Callback endpoint is unable to respond to an email sent via Messaging BB due to unallowed method in the request
 
-        Given Single email with given "abcdef12345" as api_key and valid payload is sent and returns requestUID
-        When "<unallowedMethod>" request with given "abcdef12345" as api_key and valid requestUID in the headers is sent
+        Given Single email with given "abcdef12345" as api_key and valid payload is sent and returns requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl"
+        When "<unallowedMethod>" request with given "abcdef12345" as api_key and valid requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl", in the headers is sent
         And The request contains "Meta-info" as meta and "<content>" as content in the payload
         And The response from the /callback/email endpoint is received
         And The /callback/email response should be returned in a timely manner 15000ms
         And The /callback/email response should have status 405 - Method not allowed
         And The /callback/email response should contain Allow header with POST method which is allowed
+        And The /callback/email response should have "content-type": "application/json" header
 
         Examples:
         | unallowedMethod  | content                                                                                                                                                                                                                                                  | 
@@ -59,14 +61,14 @@ Feature: Respond to an email sent via Messaging BB
     @unit @negative
     Scenario: Callback endpoint is unable to respond to an email sent via Messaging BB due to missing api_key header in the request
 
-        Given Single email with given "abcdef12345" as api_key and valid payload is sent and returns requestUID
-        When "POST" request with given valid requestUID in the header is sent
+        Given Single email with given "abcdef12345" as api_key and valid payload is sent and returns requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl"
+        When "POST" request with given valid requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl", in the header is sent
         And The request contains "Meta-info" as meta and "Q2xpZW50LXNwZWNpZmljIGNvbnRlbnQsIG1vc3QgbGlrZWx5IEpTT04=" as content in the payload
         And The request is missing required api_key in the header
         Then The response from the /callback/email endpoint is received
         And The /callback/email response should be returned in a timely manner 15000ms
         And The /callback/email response should have status 405 - Method not allowed
-
+        And The /callback/email response should have "content-type": "application/json" header
 
     @unit @negative
     Scenario: Callback endpoint is unable to respond to an email sent via Messaging BB due to missing requestUID header in the request
@@ -78,14 +80,15 @@ Feature: Respond to an email sent via Messaging BB
         Then The response from the /callback/email endpoint is received
         And The /callback/email response should be returned in a timely manner 15000ms
         And The /callback/email response should have status 405 - Method not allowed
-
+        And The /callback/email response should have "content-type": "application/json" header
 
     @unit @negative
     Scenario: Callback endpoint is unable to respond to an email sent via Messaging BB due to missing payload in the request
 
-        Given Single email with given "abcdef12345" as api_key and valid payload is sent and returns requestUID
-        When "POST" request with given "abcdef12345" as api_key and valid requestUID in the headers is sent
+        Given Single email with given "abcdef12345" as api_key and valid payload is sent and returns requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl"
+        When "POST" request with given "abcdef12345" as api_key and valid requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl", in the headers is sent
         And The request is missing required payload
         Then The response from the /callback/email endpoint is received
         And The /callback/email response should be returned in a timely manner 15000ms
         And The /callback/email response should have status 405 - Method not allowed
+        And The /callback/email response should have "content-type": "application/json" header

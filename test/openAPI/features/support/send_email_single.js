@@ -56,11 +56,11 @@ Then('The \\/send\\/email\\/single response should have status 200', () =>
 );
 
 Then(
-  'The \\/send\\/email\\/single response should have content-type: application\\/json header',
-  () =>
+  'The \\/send\\/email\\/single response should have {string}: {string} header',
+  (key, value) =>
     specSendEmailSingle
       .response()
-      .to.have.headerContains(contentTypeHeader.key, contentTypeHeader.value)
+      .should.have.headerContains(key, value)
 );
 
 Then('The \\/send\\/email\\/single response should match json schema', () =>

@@ -31,8 +31,8 @@ Before(endpointTag, () => {
 
 // Scenario: Callback endpoint successfully responds to an email sent via Messaging BB smoke type test
 Given(
-  'Single email with given {string} as api_key and valid payload is sent and returns requestUID',
-  async apiKey => {
+  'Single email with given {string} as api_key and valid payload is sent and returns requestUID, for example {string}',
+  async (apiKey, exampleRequestUID) => {
     specSendEmail
       .post(singleEmailUrl)
       .withHeaders('api_key', apiKey)
@@ -49,8 +49,8 @@ Given(
 );
 
 When(
-  '{string} request with given {string} as api_key and valid requestUID in the headers is sent',
-  (method, apiKey) =>
+  '{string} request with given {string} as api_key and valid requestUID, for example {string}, in the headers is sent',
+  (method, apiKey, exampleRequestUID) =>
     specCallbackEmail
       .withMethod(method)
       .withPath(baseUrl)
@@ -85,11 +85,18 @@ Then('The \\/callback\\/email response should have status 200', () =>
   specCallbackEmail.response().to.have.status(200)
 );
 
+Then('The \\/callback\\/email response should have {string}: {string} header',
+  (key, value) =>
+    specCallbackEmail
+      .response()
+      .should.have.headerContains(key, value)
+);
+
 // Scenario: Callback endpoint successfully responds to a batch of emails sent via Messaging BB smoke type test
 // Others Given, When, Then for this scenario are written in the aforementioned example
 Given(
-  'Batch of emails with given {string} as api_key and valid payload is sent and returns requestUID',
-  async apiKey => {
+  'Batch of emails with given {string} as api_key and valid payload is sent and returns requestUID, for example {string}',
+  async (apiKey, exampleRequestUID) => {
     specSendEmail
       .post(batchEmailUrl)
       .withHeaders('api_key', apiKey)
@@ -126,7 +133,7 @@ Then(
 // Scenario: Callback endpoint is unable to respond to an email sent via Messaging BB due to missing api_key header in the request
 // Others Given, When, Then for this scenario are written in the aforementioned example
 When(
-  '{string} request with given valid requestUID in the header is sent',
+  '{string} request with given valid requestUID, for example "btpn-aiqu-urw8-94zm-h0av-vjhl", in the header is sent',
   method =>
     specCallbackEmail
       .withMethod(method)

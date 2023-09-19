@@ -98,11 +98,11 @@ Then('The \\/status\\/email response should have status 200', () =>
 );
 
 Then(
-  'The \\/status\\/email response should have content-type: application\\/json header',
-  () =>
+  'The \\/status\\/email response should have {string}: {string} header',
+  (key, value) =>
     specStatusEmail
       .response()
-      .to.have.headerContains(contentTypeHeader.key, contentTypeHeader.value)
+      .should.have.headerContains(key, value)
 );
 
 Then('The \\/status\\/email response should match json schema', () =>
