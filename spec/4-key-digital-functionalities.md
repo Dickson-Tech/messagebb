@@ -32,11 +32,3 @@ The Messaging Building Block is a standalone messaging gateway/client/proxy (inc
 
 * asking for information about government services.
 
-_Communication between different government services (government to government) is out of the scope of this Building Block but can be enabled through the Information Mediator Building Block._
-
-## 4.3 Out-of-Scope Assumptions
-
-* Scheduling messages according to some business logic is out of the scope of this Building Block because is done by Scheduler Building Block.
-* Processing of incoming message content to apply some business logic.
-* Fully offline and no internet connection scenarios.
-* Real-time video and audio conferencing.
